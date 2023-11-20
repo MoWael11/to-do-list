@@ -1,5 +1,6 @@
 //jshint esversion:6
 
+require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const date = require(__dirname + "/date.js");
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://MoWael:m2650985@cluster0.g7ma0uu.mongodb.net/todolistDB');
+mongoose.connect(process.env.DATABASE_URL);
 
 const itemsSchema = new mongoose.Schema({
   name: String,
@@ -26,10 +27,10 @@ const item1 = new Item ({
   name: "Welcome to your to do list"
 });
 const item2 = new Item ({
-  name: "NoWelcome to your to do list"
+  name: "Put some itmes in the to do list"
 });
 const item3 = new Item ({
-  name: "YesWelcome to your to do list"
+  name: "Delete items by clicking the square"
 });
 
 const defaultItems = [item1, item2, item3];
